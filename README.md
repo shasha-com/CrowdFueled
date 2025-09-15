@@ -15,7 +15,6 @@ A decentralised crowdfunding application backed by blockchain and smart contract
   - [Installation](#installation)  
   - [Running Locally](#running-locally)  
 - [Smart Contract](#smart-contract)  
-- [Project Structure](#project-structure)   
 
 ---
 
@@ -78,11 +77,18 @@ npm install
 1. **Compile & Deploy Smart Contract**  
    - Open `SolidityCode.txt` (or solidity file) and adjust parameters.  
    - Use a framework like **Solidity** to compile and deploy:  
+2. **Configure Frontend**
+   -   In your Angular / Ionic project, set the smart contract address and ABI.
+4. **Run the UI**
+  ```bash
+    npm start
+```
+or
+```bash
+    ionic serve
+```
 
-   ```bash
-   # Example using Hardhat
-   npx hardhat compile
-   npx hardhat run scripts/deploy.js --network localhost
-   
 ### Smart Contract
-- 
+- The Solidity contract implements core logic for creating campaigns and receiving contributions.
+- It enforces conditions such as funding goal target, minimum contribution, and possibly refunds if goal not reached (if that feature is present).
+- You may need to test the contract thoroughly (unit tests, edge cases) especially around security (reentrancy, overflow, etc.).

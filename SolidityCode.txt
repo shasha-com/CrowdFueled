@@ -1,0 +1,52 @@
+pragma solidity ^0.5.10;
+
+contract CampaignContract {
+    // Model of Campaign & Transaction
+    struct Campaign {
+        string campaignId;
+        string targetAmt;
+        string deadline;
+        string r_walletAddress;
+        string camptype;        //Donation (D)/Small Business(SB)
+        string paymentType;     //AllorNot(AoN)/AnyAmt(AA)
+    }
+
+    struct Transaction {
+        string txnId;
+        string txnAmt;
+        string senderId;
+        string s_walletAddress;
+        string campaignId;
+        string rewardId;
+        string txn_tokens;
+    }
+
+    // Read/write houses
+    mapping(uint => Campaign) public CampaignList;
+    uint public CampaignCount;
+
+    function registerNewCampaign(string memory _campaignId, string memory _targetAmt, string memory _deadline, string memory _r_walletAddress, string memory _camptype, string memory _paymentType) public {
+        CampaignCount++;
+        CampaignList[CampaignCount] = Campaign(_campaignId, _targetAmt, _deadline, _r_walletAddress, _camptype, _paymentType); // Creates a new campaign & stores it into campaignList
+    }
+
+    // Read/write houses
+    mapping(uint => Transaction) public TxnList;
+    uint public txnCount;
+
+    function registerNewTxn(string memory _txnId, string memory _txnAmt, string memory _senderId, string memory _s_walletAddress, string memory _campaignId, string memory _rewardId, string memory _tokens) public {
+        txnCount++;
+        TxnList[txnCount] = Transaction(_txnId, _txnAmt, _senderId, _s_walletAddress, _campaignId, _rewardId, _tokens); // Creates a new Txn & stores it into TxnList
+    }
+
+
+    constructor() public {
+        registerNewCampaign("LTp5sg5pPMqPwbSWn1TF", "0.05", "2023-01-20", "0x9a63f964263d906858A1Ff6AD3302DA6f4c76c38", "Small Business", "AllorNothing");
+        registerNewCampaign("8bMKuxPMrtUf6roHmK8a", "0.5", "2023-01-31", "0x9a63f964263d906858A1Ff6AD3302DA6f4c76c38", "Donation", "AnyAmt");
+        // registerNewCampaign("325", "1", "02-01-2023", "0x3cd6Cc977c7F59F1C46a087bF27b880225BC8Fdf", "D", "AA");
+        registerNewTxn("124", "0.0001", "342344", "0x9a63f964263d906858A1Ff6AD3302DA6f4c76c38", "324", "32", "10d45e6088a0d30b06bdabb4dadcd1980790b8619ce7010cbb32c05b4391708ee75418d86aa4ced8c0ad4b7a08ddcd6c896b07f6a8a212cd46a37ada26d4789a");
+        // registerNewTxn("125", "0.001", "342344", "0x9a63f964263d906858A1Ff6AD3302DA6f4c76c38", "323", "31", "174e91661d78be34080a55dbeefddb991e43178a");
+        // registerNewTxn("127", "0.001"," 342344", "0x9a63f964263d906858A1Ff6AD3302DA6f4c76c38", "323", "31", "174e91661d78be34080a55dbeefddb991e43178a");
+        // registerNewTxn("126", "0.0021", "342344", "0x9a63f964263d906858A1Ff6AD3302DA6f4c76c38", "325", "33", "8e3a88fd83c3093eb21b015a72c083c951efb6ff");
+    }
+}
